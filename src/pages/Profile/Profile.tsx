@@ -1,9 +1,10 @@
 import {getProfileUserAsync} from "../../features/GetProfileUser/getProfileUser.ts";
 import {useEffect, useState} from "react";
+import {UserProfile} from "../../interfaces/UserProfile.ts";
 import './Profile.css';
 
 export default function Profile() {
-    const [profile, setProfile] = useState({});
+    const [profile, setProfile] = useState<UserProfile | null>(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 

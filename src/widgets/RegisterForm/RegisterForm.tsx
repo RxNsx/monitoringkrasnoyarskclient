@@ -1,6 +1,6 @@
 import {useState} from "react";
-import registerUserAsync from "../../features/RegisterUser/registerUser.ts";
 import {useNavigate} from "react-router-dom";
+import registerUserAsync from "../../features/RegisterUser/registerUser.ts";
 import {RegisterUser} from "../../interfaces/RegisterUser.ts";
 
 export default function RegisterForm() {
