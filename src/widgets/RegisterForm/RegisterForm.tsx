@@ -1,7 +1,7 @@
 import {useState} from "react";
 import registerUserAsync from "../../features/RegisterUser/registerUser.ts";
 import {useNavigate} from "react-router-dom";
-import {RegisterUser} from "../../entities/RegisterUser.ts";
+import {RegisterUser} from "../../interfaces/RegisterUser.ts";
 
 export default function RegisterForm() {
     const [loginName, setLogin] = useState('');

@@ -1,6 +1,6 @@
 import {serverIp} from "../../app/providers/proxy.ts";
-import {RegisterResponse} from "../../entities/RegisterResponse.ts";
-import {RegisterUser} from "../../entities/RegisterUser.ts";
+import {RegisterResponse} from "../../interfaces/RegisterResponse.ts";
+import {RegisterUser} from "../../interfaces/RegisterUser.ts";
 
 export default async function registerUserAsync(props : RegisterUser)
     : Promise<RegisterResponse> {

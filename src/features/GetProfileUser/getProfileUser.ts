@@ -1,5 +1,5 @@
 import {serverIp} from "../../app/providers/proxy.ts";
-import {UserProfile} from "../../entities/UserProfile.ts";
+import {UserProfile} from "../../interfaces/UserProfile.ts";
 
 const getLocalStorageLoginName = () => {
     return localStorage.getItem("loginName");

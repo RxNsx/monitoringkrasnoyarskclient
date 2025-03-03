@@ -1,6 +1,6 @@
 import {serverIp} from "../../app/providers/proxy.ts";
-import {LoginUser} from "../../entities/LoginUser.ts";
-import {LoginResponse} from "../../entities/LoginResponse.ts";
+import {LoginUser} from "../../interfaces/LoginUser.ts";
+import {LoginResponse} from "../../interfaces/LoginResponse.ts";
 
 export async function loginUserAsync(props : LoginUser)
     : Promise<LoginResponse> {

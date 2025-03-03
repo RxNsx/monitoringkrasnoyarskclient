@@ -1,4 +1,4 @@
-import districts from "../../entities/district.ts";
+import districts from "../../interfaces/district.ts";
 import {NavLink} from "react-router-dom";
 import {useContext} from "react";
 import Cookies from "js-cookie";

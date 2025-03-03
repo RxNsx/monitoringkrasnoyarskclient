@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import './LoginForm.css';
 import Cookies from "js-cookie";
 import {AuthContext} from "../../app/App.tsx";
-import {LoginUser} from "../../entities/LoginUser.ts";
+import {LoginUser} from "../../interfaces/LoginUser.ts";
 
 export default function LoginForm() {
     const authContext = useContext(AuthContext);
