@@ -3,7 +3,7 @@ import {RegisterResponse} from "../../entities/RegisterResponse.ts";
 import {RegisterUser} from "../../entities/RegisterUser.ts";
 
 export default async function registerUserAsync(props : RegisterUser)
-    : Promise<RegisterResponse | void> {
+    : Promise<RegisterResponse> {
     const url = serverIp + "api/Users/RegisterUser";
 
     const registerData = {
@@ -28,13 +28,11 @@ export default async function registerUserAsync(props : RegisterUser)
             return response.json();
         })
         .then(data => {
-            return {
-                userName: data.userName,
+            const responseData : RegisterResponse = {
                 loginName: data.loginName,
+                userName: data.userName,
                 email: data.email,
-            };
-        })
-        .catch(error => {
-            console.log(error)
-        })
+            }
+            return responseData;
+        });
 }

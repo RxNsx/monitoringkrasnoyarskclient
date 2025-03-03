@@ -1,10 +1,11 @@
 import {serverIp} from "../../app/providers/proxy.ts";
+import {UserProfile} from "../../entities/UserProfile.ts";
 
 const getLocalStorageLoginName = () => {
     return localStorage.getItem("loginName");
 }
 
-export async function getProfileUserAsync() {
+export async function getProfileUserAsync() : Promise<UserProfile> {
     const url = serverIp + "api/users/GetUser";
     const loginName = getLocalStorageLoginName();
 
@@ -22,9 +23,10 @@ export async function getProfileUserAsync() {
             return response.json();
         })
         .then(data => {
-            return {
+            const profileData : UserProfile = {
                 loginName: data.userName,
                 userEmail: data.email
             }
+            return profileData;
         })
 }

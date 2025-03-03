@@ -22,7 +22,8 @@ export default function LoginForm() {
 
         try
         {
-            const response = await loginUserAsync(newProfile);
+            const response = await loginUserAsync(newProfile)
+                .catch(error => setErrorMessage(error.message));
             Cookies.set("token", response.tokenData);
             authContext?.setIsAuthenticated(true);
             authContext?.setTokenData(response.tokenData);

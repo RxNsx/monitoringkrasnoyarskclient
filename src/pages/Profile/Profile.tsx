@@ -27,10 +27,10 @@ export default function Profile() {
 
     return ( <>
             <div>
-                <h2>{profile.loginName}</h2>
+                <h2>{profile?.loginName}</h2>
             </div>
             <div>
-                <h2>{profile.userEmail}</h2>
+                <h2>{profile?.userEmail}</h2>
             </div>
         </>
     )
