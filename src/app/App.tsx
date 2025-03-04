@@ -12,8 +12,8 @@ type AuthContextType = {
 export const AuthContext = createContext<null | AuthContextType>(null);
 
 export default function App() {
-    const [isAuthenticated, setAuthenticated] = useState(false);
-    const [token, setTokenData] = useState('');
+    const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
+    const [token, setTokenData] = useState<string>('');
 
     useEffect(() => {
         const storedToken = Cookies.get("token");

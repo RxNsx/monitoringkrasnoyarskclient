@@ -32,7 +32,6 @@ export default function LoginForm() {
         authContext?.setTokenData(response.tokenData);
         evt.target.reset();
         navigate("/");
-
     }
 
     const onResetFormHandler = () => {

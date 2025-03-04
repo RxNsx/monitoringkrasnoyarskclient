@@ -16,7 +16,7 @@ export default function Navigation () {
     }
 
     return (
-        <Nav defaultActiveKey="/home" className="flex-lg-column align-items-center">
+        <Nav defaultActiveKey="/home" className="flex-column justify-content-center align-items-center" >
             <h4>Красноярск</h4>
             {districts.map((district) => (
                 <>
@@ -27,16 +27,15 @@ export default function Navigation () {
             ))}
 
             <br/>
+            <br/>
             <div>
                 <PeopleFill className="d-block m-auto"/>
                 {authContext?.isAuthenticated
                     ? <>
                         <Nav.Link href="/profile">Профиль</Nav.Link>
-                        <button onClick={() => {
-                            logout()
-                        }}>
+                        <Nav.Link onClick={logout}>
                             Выйти
-                        </button>
+                        </Nav.Link>
                     </>
                     : <>
                         <Nav.Link href="/register">Зарегистрироваться</Nav.Link>
