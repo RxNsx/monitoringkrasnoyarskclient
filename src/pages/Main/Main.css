@@ -1,0 +1,9 @@
+nav {
+    float: left;
+    width: 20%;
+}
+
+article {
+    float: right;
+    width: 80%;
+}

@@ -9,7 +9,7 @@ export default function YandexMap() {
     return(
             <div className="map-container">
                 <YMaps query={{apiKey: apiConfig.YandexApiKey}}>
-                    <Map defaultState={{center: COORDINATES, zoom: ZOOM}} width={"100%"} height={"100%"} />
+                    <Map defaultState={{center: COORDINATES, zoom: ZOOM}} width={"100%"} height={"100vh"} />
                 </YMaps>
             </div>
     )

@@ -1,9 +1,8 @@
-import districts from "../../interfaces/district.ts";
-import {NavLink} from "react-router-dom";
 import {useContext} from "react";
 import Cookies from "js-cookie";
 import {AuthContext} from "../../app/App.tsx";
-import { Button } from "react-bootstrap";
+import {Nav, Navbar} from "react-bootstrap";
+import districts from "../../interfaces/district.ts";
 
 export default function Navigation () {
     const authContext = useContext(AuthContext);
@@ -16,35 +15,27 @@ export default function Navigation () {
     }
 
     return (
-        <>
-            <table>
-                <tbody>
-                    {districts.map((district, index) => (
-                        <tr key={index}>
-                            <td>{district.id}</td>
-                            <td onClick={() => console.log(`clicked ${district.title}`)}>
+            <Navbar className="bg-gradient" color="dark" expand="md">
+                <Nav defaultActiveKey="/home" className="flex-column">
+                    {districts.map((district) => (
+                        <>
+                            <Nav.Link onClick={() => console.log("Clicked")}>
                                 {district.title}
-                            </td>
-                            <td>
-                                <Button variant="light" size="lg">
-                                    {district.title}
-                                </Button>
-                            </td>
-                        </tr>
+                            </Nav.Link>
+                        </>
                     ))}
-                </tbody>
-            </table>
 
-            {authContext?.isAuthenticated
-                ? <>
-                    <NavLink to="/profile">Профиль</NavLink>
-                    <button onClick={() => {logout()}}>Выйти</button>
-                </>
-                : <>
-                    <NavLink to="/register">Зарегистрироваться</NavLink>
-                    <NavLink to="/login">Войти</NavLink>
-                </>
-            }
-        </>
+                    {authContext?.isAuthenticated
+                        ? <>
+                            <Nav.Link href="/profile">Профиль</Nav.Link>
+                            <button onClick={() => {logout()}}>Выйти</button>
+                        </>
+                        : <>
+                            <Nav.Link href="/register">Зарегистрироваться</Nav.Link>
+                            <Nav.Link href="/login">Войти</Nav.Link>
+                        </>
+                    }
+                </Nav>
+            </Navbar>
     )
 }
