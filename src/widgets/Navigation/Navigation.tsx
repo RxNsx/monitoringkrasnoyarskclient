@@ -3,8 +3,9 @@ import {NavLink} from "react-router-dom";
 import {useContext} from "react";
 import Cookies from "js-cookie";
 import {AuthContext} from "../../app/App.tsx";
+import { Button } from "react-bootstrap";
 
-export default function Navbar () {
+export default function Navigation () {
     const authContext = useContext(AuthContext);
 
     const logout = () => {
@@ -16,11 +17,23 @@ export default function Navbar () {
 
     return (
         <>
-            {districts.map(item => (
-                <li key={item.id}>{item.title}</li>
-            ))}
-
-            <br/>
+            <table>
+                <tbody>
+                    {districts.map((district, index) => (
+                        <tr key={index}>
+                            <td>{district.id}</td>
+                            <td onClick={() => console.log(`clicked ${district.title}`)}>
+                                {district.title}
+                            </td>
+                            <td>
+                                <Button variant="light" size="lg">
+                                    {district.title}
+                                </Button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
 
             {authContext?.isAuthenticated
                 ? <>
