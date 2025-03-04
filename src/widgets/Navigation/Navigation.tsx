@@ -4,11 +4,11 @@ import {AuthContext} from "../../app/App.tsx";
 import {Nav} from "react-bootstrap";
 import {PeopleFill} from "react-bootstrap-icons";
 import {getDistrictsDataAsync} from "../../features/GetDistrictsData/GetDistrictsData.ts";
-import {DistrictDataResponse, DistrictItem} from "../../interfaces/DistrictDataResponse.ts";
+import {DistrictItem} from "../../interfaces/DistrictDataResponse.ts";
 
 export default function Navigation () {
     const authContext = useContext(AuthContext);
-    const [districtsData, setDistrictsData] = useState<DistrictDataResponse | null>();
+    const [districtsData, setDistrictsData] = useState<DistrictItem[] | null>();
 
     useEffect(() => {
         const fetchDistrictData = async () => {
@@ -33,7 +33,7 @@ export default function Navigation () {
     return (
         <Nav defaultActiveKey="/home" className="flex-column justify-content-center align-items-start p-3" >
             <h4>Красноярск</h4>
-            {districtsData.map((district : DistrictItem) => (
+            {districtsData?.map((district : DistrictItem) => (
                 <Nav.Link key={district.id} onClick={() => console.log(`Clicked ${district.id}`)}>
                     {replaceDistrict(district.name)}
                 </Nav.Link>
