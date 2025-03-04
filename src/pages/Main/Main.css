@@ -1,6 +1,6 @@
 nav {
     float: left;
-    width: 20%;
+    width: 15%;
     height: 100vh;
     background-color: #99CCCC;
 }
@@ -12,7 +12,43 @@ nav .nav-link {
 
 article {
     float: right;
-    width: 80%;
+    width: 85%;
+}
+
+@media (max-width: 1200px) {
+    body {
+        font-size: large;
+    }
+
+    nav {
+        float: left;
+        width: 25%;
+        height: 100vh;
+        background-color: #99CCCC;
+    }
+
+    article {
+        float: right;
+        width: 75%;
+    }
+}
+
+@media (max-width: 1000px) {
+    body {
+        font-size: x-small;
+    }
+
+    nav {
+        float: left;
+        width: 40%;
+        height: 100vh;
+        background-color: #99CCCC;
+    }
+
+    article {
+        float: right;
+        width: 60%;
+    }
 }
 
 @media (max-width: 500px) {
