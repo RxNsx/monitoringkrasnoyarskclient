@@ -1,38 +1,38 @@
 import {loginUserAsync} from "../../features/LoginUser/loginUser.ts";
 import {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import './LoginForm.css';
 import Cookies from "js-cookie";
 import {AuthContext} from "../../app/App.tsx";
 import {LoginUser} from "../../interfaces/LoginUser.ts";
+import {Alert, Button, Form} from "react-bootstrap";
 
 export default function LoginForm() {
     const authContext = useContext(AuthContext);
-    const [errorMessage, setErrorMessage] = useState("");
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState("");
+    const [isShowError, setIsShowError] = useState(false);
     const navigate = useNavigate();
 
     const onSubmitFormHandler = async (evt) => {
         evt.preventDefault();
+
         const newProfile : LoginUser = {
             loginName: login,
             password: password
         };
 
-        try
-        {
-            const response = await loginUserAsync(newProfile)
-                .catch(error => setErrorMessage(error.message));
-            Cookies.set("token", response.tokenData);
-            authContext?.setIsAuthenticated(true);
-            authContext?.setTokenData(response.tokenData);
-            evt.target.reset();
-            navigate("/");
-        }
-        catch (error) {
-            setErrorMessage(`Error: ` + error.message);
-        }
+        const response = await loginUserAsync(newProfile)
+            .catch(error => {
+                setErrorMessage(error.message)
+                setIsShowError(true);
+            });
+        Cookies.set("token", response.tokenData);
+        authContext?.setIsAuthenticated(true);
+        authContext?.setTokenData(response.tokenData);
+        evt.target.reset();
+        navigate("/");
+
     }
 
     const onResetFormHandler = () => {
@@ -43,34 +43,39 @@ export default function LoginForm() {
 
     return (
         <>
-            <form onSubmit={onSubmitFormHandler} onReset={onResetFormHandler}>
-                <label htmlFor="login">
-                    Логин:
-                    <input
+            <div className="p-3">
+                <h1>Вход в систему:</h1>
+            </div>
+            <Form onSubmit={onSubmitFormHandler} onReset={onResetFormHandler} title="Регистрация нового пользователя">
+                <Form.Group className="p-3">
+                    <Form.Label>
+                        Логин:
+                    </Form.Label>
+                    <Form.Control
                         required
                         type="text"
-                        id="login"
-                        onChange={e => setLogin(e.target.value)}
+                        onChange={(e) => setLogin(e.target.value)}
                     />
-                </label>
-                <label htmlFor="password">
-                    Пароль:
-                    <input
+                </Form.Group>
+                <Form.Group className="p-3">
+                    <Form.Label>
+                        Пароль:
+                    </Form.Label>
+                    <Form.Control
                         required
                         type="password"
-                        id="password"
-                        onChange={e => setPassword(e.target.value)}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
-                </label>
-
-                <button type="submit" value="Войти в систему">
-                    Войти в систему
-                </button>
-                <button type="reset" value="Сбросить поля">
-                    Сбросить поля
-                </button>
-            </form>
-            <p className="errorText">{errorMessage}</p>
+                </Form.Group>
+                <Form.Group className="p-3">
+                    <Button className="btn btn-primary" type="submit">
+                        Войти в систему
+                    </Button>
+                </Form.Group>
+            </Form>
+            <Alert className="p-3" variant="danger" hidden={!isShowError}>
+                {errorMessage}
+            </Alert>
         </>
     )
 }
