@@ -1,8 +1,9 @@
 import {useContext} from "react";
 import Cookies from "js-cookie";
 import {AuthContext} from "../../app/App.tsx";
-import {Nav, Navbar} from "react-bootstrap";
+import {Nav} from "react-bootstrap";
 import districts from "../../interfaces/district.ts";
+import {PeopleFill} from "react-bootstrap-icons";
 
 export default function Navigation () {
     const authContext = useContext(AuthContext);
@@ -15,27 +16,37 @@ export default function Navigation () {
     }
 
     return (
-            <Navbar className="bg-gradient" color="dark" expand="md">
-                <Nav defaultActiveKey="/home" className="flex-column">
-                    {districts.map((district) => (
-                        <>
-                            <Nav.Link onClick={() => console.log("Clicked")}>
-                                {district.title}
-                            </Nav.Link>
-                        </>
-                    ))}
+        <Nav defaultActiveKey="/home" className="flex-lg-column align-items-center">
+            <h4>Красноярск</h4>
+            {districts.map((district) => (
+                <>
+                    <Nav.Link onClick={() => console.log("Clicked")}>
+                        {district.title}
+                    </Nav.Link>
+                </>
+            ))}
 
-                    {authContext?.isAuthenticated
-                        ? <>
-                            <Nav.Link href="/profile">Профиль</Nav.Link>
-                            <button onClick={() => {logout()}}>Выйти</button>
-                        </>
-                        : <>
-                            <Nav.Link href="/register">Зарегистрироваться</Nav.Link>
-                            <Nav.Link href="/login">Войти</Nav.Link>
-                        </>
-                    }
-                </Nav>
-            </Navbar>
+            <br/>
+            <div>
+                <PeopleFill className="d-block m-auto"/>
+                {authContext?.isAuthenticated
+                    ? <>
+                        <Nav.Link href="/profile">Профиль</Nav.Link>
+                        <button onClick={() => {
+                            logout()
+                        }}>
+                            Выйти
+                        </button>
+                    </>
+                    : <>
+                        <Nav.Link href="/register">Зарегистрироваться</Nav.Link>
+                        <Nav.Link href="/login">Войти</Nav.Link>
+                    </>
+                }
+            </div>
+
+
+
+        </Nav>
     )
 }

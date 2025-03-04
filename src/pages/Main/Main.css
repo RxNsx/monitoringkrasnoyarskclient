@@ -1,9 +1,34 @@
 nav {
     float: left;
     width: 20%;
+    height: 100vh;
+    background-color: #99CCCC;
+}
+
+nav .nav-link {
+    font-weight: bold;
+    color: black;
 }
 
 article {
     float: right;
     width: 80%;
+}
+
+@media (max-width: 500px) {
+    body {
+        font-size: xx-small;
+    }
+
+    nav {
+        float: left;
+        width: 30%;
+        height: 100vh;
+        background-color: #99CCCC;
+    }
+
+    article {
+        float: right;
+        width: 70%;
+    }
 }
