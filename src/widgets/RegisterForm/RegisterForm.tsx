@@ -2,6 +2,7 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import registerUserAsync from "../../features/RegisterUser/registerUser.ts";
 import {RegisterUser} from "../../interfaces/RegisterUser.ts";
+import {Alert, Button, Form} from "react-bootstrap";
 
 export default function RegisterForm() {
     const [loginName, setLogin] = useState('');
@@ -9,6 +10,7 @@ export default function RegisterForm() {
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [errorMessage, setErrorMessage] = useState("");
+    const [showError, setShowError] = useState(true);
     const navigate = useNavigate();
 
     const onSubmitFormHandler = async (evt) => {
@@ -22,7 +24,10 @@ export default function RegisterForm() {
         }
 
         const response = await registerUserAsync(registerUser)
-            .catch(error => setErrorMessage(`Ошибка регитстрации пользователя ${error.message}`));
+            .catch(error => {
+                setErrorMessage(`Ошибка регитстрации пользователя ${error.message}`)
+                setShowError(true);
+            });
         if(response?.loginName === registerUser.loginName
             && response?.userName === registerUser.userName
             && response?.email === registerUser.email ) {
@@ -39,52 +44,43 @@ export default function RegisterForm() {
 
     return (
         <>
-            <form onSubmit={onSubmitFormHandler} onReset={onResetFormHandler}>
-                <label htmlFor="userName">
-                    Имя пользователя:
-                    <input
-                        required
-                        id="userName"
-                        type="text"
-                        onChange={(evt) => setUserName(evt.target.value)}
-                    />
-                </label>
-                <label htmlFor="email">
-                    Почтовый адрес:
-                    <input
-                        required
-                        id="email"
-                        type="email"
-                        onChange={(evt) => setEmail(evt.target.value)}
-                    />
-                </label>
-                <label htmlFor="login">
-                    Логин:
-                    <input
-                        required
-                        type="text"
-                        id="login"
-                        onChange={e => setLogin(e.target.value)}
-                    />
-                </label>
-                <label htmlFor="passowrd">
-                    Пароль:
-                    <input
-                        required
-                        type="password"
-                        id="password"
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                </label>
-
-                <button type="submit" value="Войти в систему">
-                    Зарегистрироваться
-                </button>
-                <button type="reset" value="Сбросить поля">
-                    Сбросить поля
-                </button>
-            </form>
-            <p className="errorText">{errorMessage}</p>
+            <div className="p-3">
+                Регистрация нового пользователя:
+            </div>
+            <Form onSubmit={onSubmitFormHandler} onReset={onResetFormHandler} title="Регистрация нового пользователя">
+                <Form.Group className="p-3">
+                    <Form.Label>
+                        Имя пользователя:
+                    </Form.Label>
+                    <Form.Control required key="user-name" type="text" placeholder="Иван" />
+                </Form.Group>
+                <Form.Group className="p-3">
+                    <Form.Label>
+                        Электронная почта:
+                    </Form.Label>
+                    <Form.Control required type="email" placeholder="вашапочта@mail.ru" />
+                </Form.Group>
+                <Form.Group className="p-3">
+                    <Form.Label>
+                        Логин:
+                    </Form.Label>
+                    <Form.Control required type="text" />
+                </Form.Group>
+                <Form.Group className="p-3">
+                    <Form.Label>
+                        Пароль:
+                    </Form.Label>
+                    <Form.Control required type="password" />
+                </Form.Group>
+                <Form.Group className="p-3">
+                    <Button className="btn btn-primary" type="submit">
+                        Зарегистрироваться
+                    </Button>
+                </Form.Group>
+            </Form>
+            <Alert className="p-3" variant="danger" hidden={showError}>
+                {errorMessage}
+            </Alert>
         </>
     )
 }
