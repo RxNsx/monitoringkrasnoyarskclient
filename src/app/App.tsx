@@ -1,6 +1,7 @@
 import {Outlet} from "react-router-dom";
-import React, {createContext, useEffect, useState} from "react";
+import React, {createContext, useEffect, useMemo, useState} from "react";
 import Cookies from "js-cookie";
+import {GeoLocationData} from "../interfaces/GeoLocationData.ts";
 
 type AuthContextType = {
     isAuthenticated: boolean;
@@ -9,11 +10,20 @@ type AuthContextType = {
     setTokenData:  React.Dispatch<React.SetStateAction<string>>;
 }
 
+type YandexMapContextType = {
+    coords: GeoLocationData[] | undefined,
+    setCoords: React.Dispatch<React.SetStateAction<GeoLocationData[] | undefined>>
+}
+
 export const AuthContext = createContext<null | AuthContextType>(null);
+export const YandexMapContext = createContext<YandexMapContextType | null>(null);
 
 export default function App() {
     const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
     const [token, setTokenData] = useState<string>('');
+
+    const [coords, setCoords] = useState<GeoLocationData[]>();
+    const memoCoords = useMemo(() => ({coords, setCoords }), [coords])
 
     useEffect(() => {
         const storedToken = Cookies.get("token");
@@ -23,7 +33,7 @@ export default function App() {
         }
     }, []);
 
-    const value = {
+    const authValue = {
         isAuthenticated: isAuthenticated,
         setIsAuthenticated: setAuthenticated,
         token: token,
@@ -32,8 +42,10 @@ export default function App() {
 
     return (
         <main>
-            <AuthContext.Provider value={value}>
-                <Outlet/>
+            <AuthContext.Provider value={authValue}>
+                <YandexMapContext.Provider value={memoCoords}>
+                    <Outlet/>
+                </YandexMapContext.Provider>
             </AuthContext.Provider>
         </main>
     )
