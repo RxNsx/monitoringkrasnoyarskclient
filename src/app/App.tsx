@@ -2,18 +2,8 @@ import {Outlet} from "react-router-dom";
 import React, {createContext, useEffect, useMemo, useState} from "react";
 import Cookies from "js-cookie";
 import {GeoLocationData} from "../interfaces/GeoLocationData.ts";
-
-type AuthContextType = {
-    isAuthenticated: boolean;
-    setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
-    token: string;
-    setTokenData:  React.Dispatch<React.SetStateAction<string>>;
-}
-
-type YandexMapContextType = {
-    coords: GeoLocationData[] | undefined,
-    setCoords: React.Dispatch<React.SetStateAction<GeoLocationData[] | undefined>>
-}
+import {AuthContextType} from "./contexts/AuthContextType.tsx";
+import {YandexMapContextType} from "./contexts/YandexContextType.tsx";
 
 export const AuthContext = createContext<null | AuthContextType>(null);
 export const YandexMapContext = createContext<YandexMapContextType | null>(null);
