@@ -1,10 +1,10 @@
 import {loginUserAsync} from "../../features/LoginUser/loginUser.ts";
 import {useContext, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
 import {AuthContext} from "../../app/App.tsx";
 import {LoginUser} from "../../interfaces/LoginUser.ts";
-import {Alert, Button, Form} from "react-bootstrap";
+import {Alert, Button, Card, Col, Container, Form, Row} from "react-bootstrap";
 
 export default function LoginForm() {
     const authContext = useContext(AuthContext);
@@ -42,39 +42,63 @@ export default function LoginForm() {
 
     return (
         <>
-            <div className="p-3">
-                <h1>Вход в систему:</h1>
-            </div>
-            <Form onSubmit={onSubmitFormHandler} onReset={onResetFormHandler} title="Регистрация нового пользователя">
-                <Form.Group className="p-3">
-                    <Form.Label>
-                        Логин:
-                    </Form.Label>
-                    <Form.Control
-                        required
-                        type="text"
-                        onChange={(e) => setLogin(e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group className="p-3">
-                    <Form.Label>
-                        Пароль:
-                    </Form.Label>
-                    <Form.Control
-                        required
-                        type="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group className="p-3">
-                    <Button className="btn btn-primary" type="submit">
-                        Войти в систему
-                    </Button>
-                </Form.Group>
-            </Form>
-            <Alert className="p-3" variant="danger" hidden={!isShowError}>
-                {errorMessage}
-            </Alert>
+            <Container className="py-5 h-100">
+                <Row className="d-flex justify-content-center align-items-center h-100">
+                    <Col md={8} lg={6} xl={5}>
+                        <Card bg="dark" text="white" style={{borderRadius: '1rem'}}>
+                            <Card.Body className="p-5 text-center">
+                                <Form onSubmit={onSubmitFormHandler} onReset={onResetFormHandler}
+                                      title="Регистрация нового пользователя">
+                                    <div className="mb-md-5 mt-md-4 pb-5">
+                                        <h2 className="fw-bold mb-2 text-uppercase">Вход</h2>
+                                        <Form.Group className="p-3">
+                                            <Form.Label>
+                                                Логин:
+                                            </Form.Label>
+                                            <Form.Control
+                                                required
+                                                type="text"
+                                                placeholder="Ваш логин для входа"
+                                                onChange={(e) => setLogin(e.target.value)}
+                                            />
+                                        </Form.Group>
+                                        <Form.Group className="p-3">
+                                            <Form.Label>
+                                                Пароль:
+                                            </Form.Label>
+                                            <Form.Control
+                                                required
+                                                type="password"
+                                                onChange={(e) => setPassword(e.target.value)}
+                                            />
+                                        </Form.Group>
+                                        <Form.Group className="p-3">
+                                            <Button className="btn btn-primary" type="submit">
+                                                Войти в систему
+                                            </Button>
+                                        </Form.Group>
+                                    </div>
+                                    <p className="mb-0">
+                                        Еще не зарегистрированы?
+                                        <br/>
+                                        <Link to="/register">
+                                            Зарегистрироваться
+                                        </Link>
+                                    </p>
+                                    <div className="mt-md-4 pb-2">
+                                        <Link to="/">
+                                            Вернуться на главную
+                                        </Link>
+                                    </div>
+                                </Form>
+                                <Alert className="p-3" variant="danger" hidden={!isShowError}>
+                                    {errorMessage}
+                                </Alert>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
         </>
     )
 }
