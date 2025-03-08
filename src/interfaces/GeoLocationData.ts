@@ -1,5 +1,6 @@
 export interface GeoLocationData {
     address: string,
     latitude: number,
-    longtitude: number
+    longtitude: number,
+    serviceTypeName: string
 }
