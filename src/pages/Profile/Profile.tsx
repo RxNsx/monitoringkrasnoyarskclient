@@ -5,13 +5,15 @@ import './Profile.css';
 
 export default function Profile() {
     const [profile, setProfile] = useState<UserProfile | null>(null);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const fetchData = async () => {
             const data = await getProfileUserAsync()
-                .catch(e => { setError(e.message)});
+            if(data === null) {
+                setError("Ошибка получения профиля")
+            }
             setProfile(data);
             setLoading(false);
         }

@@ -26,7 +26,7 @@ export default function RegisterForm() {
         return true;
     }
 
-    const onSubmitFormHandler = async (evt) => {
+    const onSubmitFormHandler = async (evt : any) => {
         evt.preventDefault();
 
         if(!checkEqualPasswords()) {

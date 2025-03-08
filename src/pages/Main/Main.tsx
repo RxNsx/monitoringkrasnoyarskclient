@@ -1,16 +1,13 @@
 import YandexMap from "../../widgets/YandexMap/YandexMap.tsx";
 import Navigation from "../../widgets/Navigation/Navigation.tsx";
 import "./Main.css";
-import {useContext} from "react";
-import {YandexMapContext} from "../../app/App.tsx";
 
 export default function Main () {
-    const yandexMapContext = useContext(YandexMapContext);
 
     return (
         <>
             <section>
-                <nav>
+                <nav style={{background: 'linear-gradient(135deg, #99CCCC 0%, #2575fc 100%)'}}>
                     <Navigation/>
                 </nav>
                 <article>

@@ -28,23 +28,9 @@ export default function YandexMap() {
         }
     }
 
-    const getIconByServiceTypeName = (serviceTypeName : string) => {
-        switch(serviceTypeName) {
-            case "Теплоснабжение":
-                return 'red';
-            case "Холодное водоснабжение":
-                return 'darkblue';
-            case "Электроснабжение":
-                console.log("blue")
-                return 'lightblue';
-            default:
-                return 'gray';
-        }
-    }
-
     return(
             <div className="map-container">
-                <YMaps query={{apiKey: apiConfig.YandexApiKey}}>
+                <YMaps query={{apikey: apiConfig.YandexApiKey}}>
                     <Map defaultState={{center: COORDINATES, zoom: ZOOM}} width={"100%"} height={"100vh"}>
                         {yandexMapContext!.coords && yandexMapContext!.coords.map((item : GeoLocationData) => (
                             <div>

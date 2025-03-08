@@ -1,5 +1,5 @@
 import {loginUserAsync} from "../../features/LoginUser/loginUser.ts";
-import {useContext, useState} from "react";
+import {FormEvent, useContext, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
 import {AuthContext} from "../../app/App.tsx";
@@ -14,7 +14,7 @@ export default function LoginForm() {
     const [isShowError, setIsShowError] = useState(false);
     const navigate = useNavigate();
 
-    const onSubmitFormHandler = async (evt) => {
+    const onSubmitFormHandler = async (evt : FormEvent) => {
         evt.preventDefault();
 
         const newProfile : LoginUser = {
@@ -23,14 +23,14 @@ export default function LoginForm() {
         };
 
         const response = await loginUserAsync(newProfile)
-            .catch(error => {
-                setErrorMessage(error.message)
-                setIsShowError(true);
-            });
+        if(response === null) {
+            setErrorMessage("Ошибка входа в систему")
+            setIsShowError(true);
+        }
+
         Cookies.set("token", response.tokenData);
         authContext?.setIsAuthenticated(true);
         authContext?.setTokenData(response.tokenData);
-        evt.target.reset();
         navigate("/");
     }
 

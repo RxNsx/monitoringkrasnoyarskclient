@@ -1,5 +1,5 @@
 import {Outlet} from "react-router-dom";
-import React, {createContext, useEffect, useMemo, useState} from "react";
+import {createContext, useEffect, useMemo, useState} from "react";
 import Cookies from "js-cookie";
 import {GeoLocationData} from "../interfaces/GeoLocationData.ts";
 import {AuthContextType} from "./contexts/AuthContextType.tsx";
