@@ -1,9 +1,8 @@
-import {serverIp} from "../../app/providers/proxy.ts";
 import {GeoLocationData} from "../../interfaces/GeoLocationData.ts";
 
 
 export async function getGeoLocationData(districtId : string) : Promise<GeoLocationData[]> {
-    const url = serverIp + `api/Geocode/GetDistrictGeoCoordinates?districtId=${districtId}`;
+    const url = `api/Geocode/GetDistrictGeoCoordinates?districtId=${districtId}`;
     console.log(`GeoLocationData URL: ${url}`);
 
     return await fetch(url, {

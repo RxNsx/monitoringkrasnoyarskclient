@@ -1,4 +1,3 @@
-import {serverIp} from "../../app/providers/proxy.ts";
 import {UserProfile} from "../../interfaces/UserProfile.ts";
 
 const getLocalStorageLoginName = () => {
@@ -6,7 +5,7 @@ const getLocalStorageLoginName = () => {
 }
 
 export async function getProfileUserAsync() : Promise<UserProfile> {
-    const url = serverIp + "api/users/GetUser";
+    const url = "api/users/GetUser";
     const loginName = getLocalStorageLoginName();
 
     return await fetch(url + `?loginName=${loginName}`, {

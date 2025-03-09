@@ -1,8 +1,7 @@
 import {DistrictItem} from "../../interfaces/DistrictDataResponse.ts";
-import {serverIp} from "../../app/providers/proxy.ts";
 
 export async function getDistrictsDataAsync() : Promise<DistrictItem[]> {
-    const url = serverIp + "api/Districts/GetDistricts";
+    const url = "api/Districts/GetDistricts";
 
     console.log("start handling getDistrictsDataAsync");
 

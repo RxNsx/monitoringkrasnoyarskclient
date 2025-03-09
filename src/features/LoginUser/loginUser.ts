@@ -1,11 +1,10 @@
-import {serverIp} from "../../app/providers/proxy.ts";
 import {LoginUser} from "../../interfaces/LoginUser.ts";
 import {LoginResponse} from "../../interfaces/LoginResponse.ts";
 
 export async function loginUserAsync(props : LoginUser)
     : Promise<LoginResponse> {
 
-    const url = serverIp + "api/Login/LoginUser";
+    const url = "api/Login/LoginUser";
 
     const loginData = {
         loginName: props.loginName,
