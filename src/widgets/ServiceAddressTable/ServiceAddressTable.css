@@ -1,0 +1,26 @@
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    display: block;
+    width: 100%;
+    table-layout: fixed;
+}
+
+th {
+    position: sticky;
+    width: 45%;
+    top: 0;
+    background: white;
+}
+
+table tr:nth-child(even) {
+    background-color: #99CCCC;
+}
+
+tbody {
+    display: block;
+    height: 20vh;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

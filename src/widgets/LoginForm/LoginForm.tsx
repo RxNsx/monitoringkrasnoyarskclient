@@ -92,10 +92,10 @@ export default function LoginForm() {
                                                 Вернуться на главную
                                             </Link>
                                         </div>
+                                        <Alert className="p-3" variant="danger" hidden={!isShowError}>
+                                            {errorMessage}
+                                        </Alert>
                                     </Form>
-                                    <Alert className="p-3" variant="danger" hidden={!isShowError}>
-                                        {errorMessage}
-                                    </Alert>
                                 </Card.Body>
                             </Card>
                         </Col>

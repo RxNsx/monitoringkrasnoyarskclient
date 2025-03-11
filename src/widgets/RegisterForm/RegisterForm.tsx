@@ -139,15 +139,15 @@ export default function RegisterForm() {
                                                 Войти в систему
                                             </Link>
                                         </p>
-                                        <div className="mt-md-4 pb-2">
+                                        <div className="mt-md-1">
                                             <Link to="/">
-                                                Вернуться на главную
+                                                Вернуться на главную1
                                             </Link>
                                         </div>
+                                        <Alert className="p-3" variant="danger" hidden={!isShowError}>
+                                            {errorMessage}
+                                        </Alert>
                                     </Form>
-                                    <Alert className="p-3" variant="danger" hidden={!isShowError}>
-                                        {errorMessage}
-                                    </Alert>
                                 </Card.Body>
                             </Card>
                         </Col>
