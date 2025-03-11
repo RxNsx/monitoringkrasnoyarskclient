@@ -77,7 +77,7 @@ export default function Profile() {
                                     />
                                 </Form.Group>
                                 {isFormDisabled ? (
-                                    <Form.Group>
+                                    <Form.Group className="p-3">
                                         <Button
                                             className="btn btn-warning"
                                             onClick={() => setIsFormDisabled(false)}
@@ -87,7 +87,7 @@ export default function Profile() {
                                     </Form.Group>
                                 ) : (
                                     <>
-                                        <Form.Group>
+                                        <Form.Group className="p-3">
                                             <Button
                                                 className="btn btn-danger me-2"
                                                 onClick={() => {
@@ -113,7 +113,7 @@ export default function Profile() {
                             </div>
                         </Form>
                     </Col>
-                </Row>
+                </Row>ы
             </Container>
         </div>
     );
