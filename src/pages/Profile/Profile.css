@@ -3,3 +3,11 @@
     font-weight: bold;
     text-decoration: underline;
 }
+
+.control-color:enabled {
+    background-color: white;
+}
+
+.control-color:disabled {
+    background-color: gray;
+}

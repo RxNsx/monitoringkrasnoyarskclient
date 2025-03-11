@@ -17,7 +17,7 @@ export async function getProfileUserAsync() : Promise<UserProfile> {
     })
         .then(response => {
             if(!response.ok) {
-                throw new Error("Ошибка получения профиля");
+                return null;
             }
             return response.json();
         })

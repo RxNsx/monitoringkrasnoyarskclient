@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {FormEvent, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import registerUserAsync from "../../features/RegisterUser/registerUser.ts";
 import {RegisterUser} from "../../interfaces/RegisterUser.ts";
@@ -26,7 +26,7 @@ export default function RegisterForm() {
         return true;
     }
 
-    const onSubmitFormHandler = async (evt : any) => {
+    const onSubmitFormHandler = async (evt : FormEvent) => {
         evt.preventDefault();
 
         if(!checkEqualPasswords()) {
@@ -68,7 +68,7 @@ export default function RegisterForm() {
                             <Card bg="dark" text="white" style={{borderRadius: '1rem'}}>
                                 <Card.Body className="p-5 text-center">
                                     <Form onSubmit={onSubmitFormHandler} onReset={onResetFormHandler}
-                                          title="Регистрация нового пользователя">
+                                          title="Профиль пользователя">
                                         <div className="mb-md-5 mt-md-4 pb-5">
                                             <h2 className="fw-bold mb-2 text-uppercase">Регистрация</h2>
                                             <Form.Group className="p-3">
