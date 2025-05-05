@@ -2,7 +2,7 @@ import {GeoLocationData} from "../../interfaces/GeoLocationData.ts";
 
 
 export async function getGeoLocationData(districtId : string) : Promise<GeoLocationData[]> {
-    const url = `api/Geocode/GetDistrictGeoCoordinates?districtId=${districtId}`;
+    const url = `http://127.0.0.1:5000/api/Geocode/GetDistrictGeoCoordinates?districtId=${districtId}`;
     console.log(`GeoLocationData URL: ${url}`);
 
     return await fetch(url, {

@@ -26,25 +26,9 @@ export default function ServiceAddressTable() {
                             <tr>
                                 <td>{item.serviceTypeName}</td>
                                 <td>{item.address}</td>
-                                {/*<td>Широта: {item.latitude} Долгота: {item.longtitude}</td>*/}
-                                <td>03 мая 11-25 - 03 мая 16:00</td>
+                                <td>{item.dateFrom} - {item.dateTo}</td>
                             </tr>
                         )}
-                    <tr>
-                    <td>Холодное водоснабжение</td>
-                        <td>Калинина 80</td>
-                        <td>03 мая 11-25 - 03 мая 16:00</td>
-                    </tr>
-                    <tr>
-                        <td>Холодное водоснабжение</td>
-                        <td>Киренского 80ст1</td>
-                        <td>03 мая 11-25 - 03 мая 16:00</td>
-                    </tr>
-                    <tr>
-                        <td>Холодное водоснабжение</td>
-                        <td>Киренского Калинина 80ст2</td>
-                        <td>03 мая 11-25 - 03 мая 16:00</td>
-                    </tr>
                     </tbody>
                 </table>
             </div>

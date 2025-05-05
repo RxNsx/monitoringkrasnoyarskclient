@@ -2,14 +2,17 @@ import { getProfileUserAsync } from "../../features/GetProfileUser/getProfileUse
 import { FormEvent, useEffect, useState } from "react";
 import { UserProfile } from "../../interfaces/UserProfile.ts";
 import './Profile.css';
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import {Button, Col, Container, Dropdown, DropdownMenu, Form, Row} from "react-bootstrap";
 import { Link } from "react-router-dom";
+import {getStreetsData} from "../../features/GetStreetsData/getStreetDropdownData.ts";
+import {StreetData} from "../../interfaces/StreetData.ts";
 
 export default function Profile() {
     const [profile, setProfile] = useState<UserProfile | null>(null);
     const [error, setError] = useState<string>('');
     const [login, setLogin] = useState<string>('');
     const [email, setEmail] = useState<string>('');
+    const [streets, setStreets] = useState<StreetData[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [isFormDisabled, setIsFormDisabled] = useState<boolean>(true);
 
@@ -23,9 +26,20 @@ export default function Profile() {
                 setLogin(data.loginName); // Initialize login state
                 setEmail(data.userEmail); // Initialize email state
             }
-            setLoading(false);
         };
+
+        const streetsData = async () => {
+            const data = await getStreetsData();
+            if(!data) {
+                setError("Ошибка получение данных по улицам г. Красноярск");
+            } else {
+                setStreets(data);
+            }
+        }
+
         fetchData();
+        streetsData();
+        setLoading(false);
     }, []);
 
     if (loading) {
@@ -36,10 +50,14 @@ export default function Profile() {
         return <div className="errorText">Ошибка загрузки профиля: {error}</div>;
     }
 
+
+    const updateProfile = async (evt: FormEvent) => {
+
+    }
+
     const onSubmitFormHandler = async (evt: FormEvent) => {
         evt.preventDefault();
-        console.log("Updated Login:", login);
-        console.log("Updated Email:", email);
+        //TODO: Изменить данные пользователя
         setIsFormDisabled(true);
     };
 
@@ -76,6 +94,18 @@ export default function Profile() {
                                         onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </Form.Group>
+                                <Dropdown className="p-3">
+                                    <Dropdown.Toggle id="dropdown-autoclose-true">
+                                        Абельмановская
+                                    </Dropdown.Toggle>
+                                    <DropdownMenu>
+                                        {streets.map((item : StreetData) => (
+                                            <Dropdown.Item onClick={}>
+                                                {item.streetName}
+                                            </Dropdown.Item>
+                                        ))}
+                                    </DropdownMenu>
+                                </Dropdown>
                                 {isFormDisabled ? (
                                     <Form.Group className="p-3">
                                         <Button

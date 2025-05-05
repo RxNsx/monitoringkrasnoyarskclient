@@ -1,7 +1,7 @@
 import {DistrictItem} from "../../interfaces/DistrictDataResponse.ts";
 
 export async function getDistrictsDataAsync() : Promise<DistrictItem[]> {
-    const url = "api/Districts/GetDistricts";
+    const url = "http://127.0.0.1:5000/api/Districts/GetDistricts";
 
     console.log("start handling getDistrictsDataAsync");
 

@@ -11,3 +11,8 @@
 .control-color:disabled {
     background-color: gray;
 }
+
+.dropdown-menu {
+    max-height: 10vh;
+    overflow-y: scroll;
+}
