@@ -13,6 +13,7 @@ export default function Profile() {
     const [login, setLogin] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [streets, setStreets] = useState<StreetData[]>([]);
+    const [profileStreet, setProfileStreet] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
     const [isFormDisabled, setIsFormDisabled] = useState<boolean>(true);
 
@@ -95,12 +96,12 @@ export default function Profile() {
                                     />
                                 </Form.Group>
                                 <Dropdown className="p-3">
-                                    <Dropdown.Toggle id="dropdown-autoclose-true">
-                                        Абельмановская
+                                    <Dropdown.Toggle id="dropdown-autoclose-true" disabled={isFormDisabled}>
+                                        {profileStreet ? profileStreet : 'Выберите улицу для подписки'}
                                     </Dropdown.Toggle>
                                     <DropdownMenu>
                                         {streets.map((item : StreetData) => (
-                                            <Dropdown.Item onClick={}>
+                                            <Dropdown.Item onClick={() => { setProfileStreet(item!.streetName)}}>
                                                 {item.streetName}
                                             </Dropdown.Item>
                                         ))}
@@ -143,7 +144,7 @@ export default function Profile() {
                             </div>
                         </Form>
                     </Col>
-                </Row>ы
+                </Row>
             </Container>
         </div>
     );
