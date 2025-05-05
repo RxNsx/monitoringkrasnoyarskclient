@@ -31,7 +31,7 @@ export default function YandexMap() {
     return(
             <div className="map-container">
                 <YMaps query={{apikey: apiConfig.YandexApiKey}}>
-                    <Map defaultState={{center: COORDINATES, zoom: ZOOM}} width={"100%"} height={"80vh"}>
+                    <Map defaultState={{center: COORDINATES, zoom: ZOOM}} width={"100%"} height={"65vh"}>
                         {yandexMapContext!.coords && yandexMapContext!.coords.map((item : GeoLocationData) => (
                             <div>
                                 <Placemark
