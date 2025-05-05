@@ -16,7 +16,6 @@ export async function getStreetsData(): Promise<StreetData[]> {
             return response.json();
         })
         .then(data => {
-            console.log(data);
             return [...data];
         });
 }
