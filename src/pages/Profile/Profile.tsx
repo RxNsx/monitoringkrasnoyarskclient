@@ -3,21 +3,24 @@ import {FormEvent, useEffect, useState} from "react";
 import { UserProfile } from "../../interfaces/UserProfile.ts";
 import './Profile.css';
 import {Button, Col, Container, Dropdown, DropdownMenu, Form, Row} from "react-bootstrap";
-import { Link } from "react-router-dom";
 import {getStreetsData} from "../../features/GetStreetsData/getStreetDropdownData.ts";
 import {StreetData} from "../../interfaces/StreetData.ts";
 import {DistrictItem} from "../../interfaces/DistrictDataResponse.ts";
 import {getDistrictsDataAsync} from "../../features/GetDistrictsData/GetDistrictsData.ts";
+import {updateProfileUser} from "../../features/UpdateProfileUser/updateProfileUser.ts";
 
 export default function Profile() {
     const [profile, setProfile] = useState<UserProfile | null>(null);
     const [error, setError] = useState<string>('');
     const [login, setLogin] = useState<string>('');
     const [email, setEmail] = useState<string>('');
+    const [userId, setUserId] = useState<string>('');
     const [streets, setStreets] = useState<StreetData[]>([]);
     const [districts, setDistricts] = useState<DistrictItem[]>([]);
     const [profileStreet, setProfileStreet] = useState<string>('');
+    const [profileStreetId, setProfileStreetId] = useState<string>('');
     const [profileDistrict, setProfileDistrict] = useState<string>('');
+    const [profileDistrictId, setProfileDistrictId] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
     const [isFormDisabled, setIsFormDisabled] = useState<boolean>(true);
 
@@ -28,8 +31,11 @@ export default function Profile() {
                 setError("Ошибка получения профиля");
             } else {
                 setProfile(data);
-                setLogin(data.loginName); // Initialize login state
-                setEmail(data.userEmail); // Initialize email state
+                setUserId(data.userId);
+                setLogin(data.loginName);
+                setEmail(data.userEmail);
+                setProfileStreet(data?.streetName);
+                setProfileDistrict(data?.districtName);
             }
         };
 
@@ -71,8 +77,12 @@ export default function Profile() {
 
     const onSubmitFormHandler = async (evt: FormEvent) => {
         evt.preventDefault();
-        //TODO: Изменить данные пользователя
+        await updateUserProfileInfo();
         setIsFormDisabled(true);
+    };
+
+    const updateUserProfileInfo = async () => {
+        await updateProfileUser(userId, login, email, profileDistrictId, profileStreetId);
     };
 
     return (
@@ -112,11 +122,15 @@ export default function Profile() {
                                     <Form.Label>Район:</Form.Label>
                                     <Dropdown>
                                         <Dropdown.Toggle id="dropdown-autoclose-true" disabled={isFormDisabled}>
-                                            {profileDistrict ? profileDistrict : 'Выберите район для отслеживания отключений'}
+                                            {profileDistrict ||'Выберите район для отслеживания отключений'}
                                         </Dropdown.Toggle>
                                         <DropdownMenu>
                                             {districts.map((item : DistrictItem) => (
-                                                <Dropdown.Item onClick={() => { setProfileDistrict(item!.id)}}>
+                                                <Dropdown.Item onClick={() => {
+                                                    setProfileDistrict(item!.name);
+                                                    setProfileDistrictId(item!.id)
+                                                }}
+                                                >
                                                     {item.name}
                                                 </Dropdown.Item>
                                             ))}
@@ -127,11 +141,14 @@ export default function Profile() {
                                     <Form.Label>Улица:</Form.Label>
                                     <Dropdown>
                                         <Dropdown.Toggle id="dropdown-autoclose-true" disabled={isFormDisabled}>
-                                            {profileStreet ? profileStreet : 'Выберите улицу для отслеживания отключений'}
+                                            {profileStreet || 'Выберите улицу для отслеживания отключений'}
                                         </Dropdown.Toggle>
                                         <DropdownMenu>
                                             {streets.map((item : StreetData) => (
-                                                <Dropdown.Item onClick={() => { setProfileStreet(item!.streetName)}}>
+                                                <Dropdown.Item onClick={() => {
+                                                    setProfileStreet(item!.streetName)
+                                                    setProfileStreetId(item!.streetId)
+                                                }}>
                                                     {item.streetName}
                                                 </Dropdown.Item>
                                             ))}
@@ -171,7 +188,9 @@ export default function Profile() {
                                 )}
                             </div>
                             <div className="mt-md-4 pb-2">
-                                <Link to="/">Вернуться на главную</Link>
+                                <Button className="btn btn-danger" href={"/"}>
+                                    Вернуться на главную
+                                </Button>
                             </div>
                         </Form>
                     </Col>

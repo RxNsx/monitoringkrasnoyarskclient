@@ -23,8 +23,13 @@ export async function getProfileUserAsync() : Promise<UserProfile> {
         })
         .then(data => {
             const profileData : UserProfile = {
-                loginName: data.userName,
-                userEmail: data.email
+                userId: data.userId,
+                loginName: data.loginName,
+                userEmail: data.email,
+                districtId: data.districtId,
+                districtName: data.districtName,
+                streetId: data.streetId,
+                streetName: data.streetName
             }
             return profileData;
         })
