@@ -1,5 +1,8 @@
 import {GeoLocationData} from "../../interfaces/GeoLocationData.ts";
 
+const setLocalStorageGeoLocationData = (geolocationData : GeoLocationData[]) : void => {
+    localStorage.setItem("geoLocationData", JSON.stringify(geolocationData));
+}
 
 export async function getGeoLocationDataByDistrictId(districtId : string | undefined) : Promise<GeoLocationData[]> {
     const url = `http://127.0.0.1:5000/api/Geocode/GetDistrictGeoCoordinates?districtId=${districtId}`;
@@ -19,6 +22,7 @@ export async function getGeoLocationDataByDistrictId(districtId : string | undef
             return response.json();
         })
         .then(data => {
+            setLocalStorageGeoLocationData(data);
             return [...data];
         })
 }
@@ -41,6 +45,7 @@ export async function getGeoLocationDataByStreetId(streetId : string | undefined
             return response.json();
         })
         .then(data => {
+            setLocalStorageGeoLocationData(data);
             return [...data];
         })
 }
