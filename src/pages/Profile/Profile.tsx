@@ -34,7 +34,9 @@ export default function Profile() {
                 setUserId(data.userId);
                 setLogin(data.loginName);
                 setEmail(data.userEmail);
+                setProfileStreetId(data?.streetId)
                 setProfileStreet(data?.streetName);
+                setProfileDistrictId(data?.districtId);
                 setProfileDistrict(data?.districtName);
             }
         };
