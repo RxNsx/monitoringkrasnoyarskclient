@@ -100,7 +100,7 @@ export default function Profile() {
                             <div className="mb-md-5 mt-md-4 pb-5">
                                 <h2 className="fw-bold mb-2 text-uppercase">Профиль</h2>
                                 <Form.Group className="p-3">
-                                    <Form.Label>Имя пользователя:</Form.Label>
+                                    <Form.Label>Логин пользователя:</Form.Label>
                                     <Form.Control
                                         className="control-color"
                                         disabled={isFormDisabled}
