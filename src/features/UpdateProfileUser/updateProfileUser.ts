@@ -14,6 +14,7 @@ export async function updateProfileUser(userId: string,
         districtId: districtId,
         streetId: streetId,
     }
+    console.log(updateProfileData);
 
     return await fetch(url, {
         headers: {

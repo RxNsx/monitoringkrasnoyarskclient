@@ -60,6 +60,7 @@ export default function Profile() {
         fetchData();
         streetsData();
         districtsData();
+        setTimeout(() => {}, 2000)
 
         if(districts && streets)
         {
@@ -128,7 +129,8 @@ export default function Profile() {
                                             {districts.map((item : DistrictItem) => (
                                                 <Dropdown.Item onClick={() => {
                                                     setProfileDistrict(item!.name);
-                                                    setProfileDistrictId(item!.id)
+                                                    console.log(item!.name, item!.id);
+                                                    setProfileDistrictId(item!.id);
                                                 }}
                                                 >
                                                     {item.name}
@@ -147,6 +149,7 @@ export default function Profile() {
                                             {streets.map((item : StreetData) => (
                                                 <Dropdown.Item onClick={() => {
                                                     setProfileStreet(item!.streetName)
+                                                    console.log(item!.streetId, item!.streetName);
                                                     setProfileStreetId(item!.streetId)
                                                 }}>
                                                     {item.streetName}

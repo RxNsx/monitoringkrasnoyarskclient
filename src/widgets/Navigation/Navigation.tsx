@@ -5,7 +5,10 @@ import {Nav} from "react-bootstrap";
 import {PeopleFill} from "react-bootstrap-icons";
 import {getDistrictsDataAsync} from "../../features/GetDistrictsData/GetDistrictsData.ts";
 import {DistrictItem} from "../../interfaces/DistrictDataResponse.ts";
-import {getGeoLocationDataByDistrictId} from "../../features/GetGeoLocationData/getGeoLocationData.ts";
+import {
+    getGeoLocationDataByDistrictId,
+    getGeoLocationDataByStreetId
+} from "../../features/GetGeoLocationData/getGeoLocationData.ts";
 import {UserProfile} from "../../interfaces/UserProfile.ts";
 import {getProfileUserAsync} from "../../features/GetProfileUser/getProfileUser.ts";
 import "./Navigation.css";
@@ -85,7 +88,7 @@ export default function Navigation () {
                                                 yandexMapContext?.setCoords(geoLocationData);
                                             }}
                                         >
-                                            {profile?.districtName}
+                                            {replaceDistrict(profile?.districtName)}
                                         </Nav.Link>
                                     </>
                                 )
@@ -102,7 +105,7 @@ export default function Navigation () {
                                         <Nav.Link
                                             onClick={async () => {
                                                 //TODO: Сделать запрос по улице
-                                                const geoLocationData = await getGeoLocationDataByDistrictId(profile?.streetId);
+                                                const geoLocationData = await getGeoLocationDataByStreetId(profile?.streetId);
                                                 yandexMapContext?.setCoords(geoLocationData);
                                             }}
                                         >
