@@ -26,7 +26,7 @@ export default function Navigation () {
         }
 
         const getProfileData = async () => {
-            const profileData = await getProfileUserAsync();
+            const profileData =  await getProfileUserAsync();
             setProfile(profileData);
         }
 
