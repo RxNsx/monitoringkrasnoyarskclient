@@ -13,15 +13,12 @@ export default function YandexMap() {
 
     //Получить цвет по типу сервисного обслуживания
     const getColorByServiceTypeName = (serviceTypeName : string) : string => {
-        console.log(serviceTypeName);
-
         switch(serviceTypeName) {
             case "Теплоснабжение":
                 return 'red';
             case "Холодное водоснабжение":
                 return 'darkblue';
             case "Электроснабжение":
-                console.log("blue")
                 return 'lightblue';
             default:
                 return 'gray';
