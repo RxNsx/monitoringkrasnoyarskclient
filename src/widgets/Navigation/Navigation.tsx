@@ -5,12 +5,16 @@ import {Nav} from "react-bootstrap";
 import {PeopleFill} from "react-bootstrap-icons";
 import {getDistrictsDataAsync} from "../../features/GetDistrictsData/GetDistrictsData.ts";
 import {DistrictItem} from "../../interfaces/DistrictDataResponse.ts";
-import {getGeoLocationData} from "../../features/GetGeoLocationData/getGeoLocationData.ts";
+import {getGeoLocationDataByDistrictId} from "../../features/GetGeoLocationData/getGeoLocationData.ts";
+import {UserProfile} from "../../interfaces/UserProfile.ts";
+import {getProfileUserAsync} from "../../features/GetProfileUser/getProfileUser.ts";
+import "./Navigation.css";
 
 export default function Navigation () {
     const authContext = useContext(AuthContext);
     const yandexMapContext = useContext(YandexMapContext);
     const [districtsData, setDistrictsData] = useState<DistrictItem[] | null>();
+    const [profile, setProfile] = useState<UserProfile | null>(null);
 
     useEffect(() => {
         const fetchDistrictData = async () => {
@@ -18,7 +22,13 @@ export default function Navigation () {
             setDistrictsData(data);
         }
 
+        const getProfileData = async () => {
+            const profileData = await getProfileUserAsync();
+            setProfile(profileData);
+        }
+
         fetchDistrictData();
+        getProfileData();
     }, []);
 
     const logout = () => {
@@ -39,7 +49,7 @@ export default function Navigation () {
                 <Nav.Link
                     key={district.id}
                     onClick={async () => {
-                        const geoLocationData =  await getGeoLocationData(district.id)
+                        const geoLocationData =  await getGeoLocationDataByDistrictId(district.id)
                         yandexMapContext?.setCoords(geoLocationData);
                     }}
                 >
@@ -49,7 +59,7 @@ export default function Navigation () {
                 <Nav.Link
                     key="all"
                     onClick={async () => {
-                        const geoLocationData =  await getGeoLocationData("all");
+                        const geoLocationData =  await getGeoLocationDataByDistrictId("all");
                         yandexMapContext?.setCoords(geoLocationData);
                     }}
                 >
@@ -63,6 +73,49 @@ export default function Navigation () {
                 {authContext?.isAuthenticated
                     ? <>
                         <Nav.Link href="/profile">Профиль</Nav.Link>
+                        <div className="subscribe-container p-3">
+                            <p>Подписки:</p>
+                            {profile?.districtId
+                                ? (
+                                    <>
+                                        <p>Район:</p>
+                                        <Nav.Link
+                                            onClick={async () => {
+                                                const geoLocationData =  await getGeoLocationDataByDistrictId(profile?.districtId);
+                                                yandexMapContext?.setCoords(geoLocationData);
+                                            }}
+                                        >
+                                            {profile?.districtName}
+                                        </Nav.Link>
+                                    </>
+                                )
+                                : (
+                                    <>
+                                        <p>Выберите район в профиле</p>
+                                    </>
+                                )
+                            }
+                            {profile?.streetId
+                                ? (
+                                    <>
+                                        <p>Улица:</p>
+                                        <Nav.Link
+                                            onClick={async () => {
+                                                //TODO: Сделать запрос по улице
+                                                const geoLocationData = await getGeoLocationDataByDistrictId(profile?.streetId);
+                                                yandexMapContext?.setCoords(geoLocationData);
+                                            }}
+                                        >
+                                            {profile?.streetName}
+                                        </Nav.Link>
+                                    </>
+                                ) : (
+                                    <>
+                                        <p>Выберите улицу в профиле</p>
+                                    </>
+                                )
+                            }
+                        </div>
                         <Nav.Link onClick={logout}>
                             Выйти
                         </Nav.Link>

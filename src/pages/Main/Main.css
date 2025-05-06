@@ -35,12 +35,12 @@ article {
 
 @media (max-width: 1000px) {
     body {
-        font-size: x-small;
+        font-size: small;
     }
 
     nav {
         float: left;
-        width: 40%;
+        width: 50%;
         height: 100vh;
         background-color: #99CCCC;
     }
@@ -53,12 +53,12 @@ article {
 
 @media (max-width: 500px) {
     body {
-        font-size: xx-small;
+        font-size: x-small;
     }
 
     nav {
         float: left;
-        width: 30%;
+        width: 50%;
         height: 100vh;
         background-color: #99CCCC;
     }
