@@ -16,6 +16,8 @@ export default function Profile() {
     const [email, setEmail] = useState<string>('');
     const [userId, setUserId] = useState<string>('');
     const [streets, setStreets] = useState<StreetData[]>([]);
+    const [oldPassword, setOldPassword] = useState<string>('');
+    const [newPassword, setNewPassword] = useState<string>('');
     const [districts, setDistricts] = useState<DistrictItem[]>([]);
     const [profileStreet, setProfileStreet] = useState<string>('');
     const [profileStreetId, setProfileStreetId] = useState<string>('');
@@ -94,7 +96,7 @@ export default function Profile() {
             style={{ background: 'linear-gradient(135deg, #99CCCC 0%, #2575fc 100%)' }}
         >
             <Container className="h-100">
-                <Row className="d-flex justify-content-center align-items-center h-100">
+                <Row className="d-flex justify-content-center align-items-center ">
                     <Col md={8} lg={6} xl={5}>
                         <Form onSubmit={onSubmitFormHandler}>
                             <div className="mb-md-5 mt-md-4 pb-5">
@@ -121,45 +123,75 @@ export default function Profile() {
                                         onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </Form.Group>
-                                <Form.Group className="p-3">
-                                    <Form.Label>Район:</Form.Label>
-                                    <Dropdown>
-                                        <Dropdown.Toggle id="dropdown-autoclose-true" disabled={isFormDisabled}>
-                                            {profileDistrict ||'Выберите район для отслеживания отключений'}
-                                        </Dropdown.Toggle>
-                                        <DropdownMenu>
-                                            {districts.map((item : DistrictItem) => (
-                                                <Dropdown.Item onClick={() => {
-                                                    setProfileDistrict(item!.name);
-                                                    console.log(item!.name, item!.id);
-                                                    setProfileDistrictId(item!.id);
-                                                }}
-                                                >
-                                                    {item.name}
-                                                </Dropdown.Item>
-                                            ))}
-                                        </DropdownMenu>
-                                    </Dropdown>
-                                </Form.Group>
-                                <Form.Group className="p-3">
-                                    <Form.Label>Улица:</Form.Label>
-                                    <Dropdown>
-                                        <Dropdown.Toggle id="dropdown-autoclose-true" disabled={isFormDisabled}>
-                                            {profileStreet || 'Выберите улицу для отслеживания отключений'}
-                                        </Dropdown.Toggle>
-                                        <DropdownMenu>
-                                            {streets.map((item : StreetData) => (
-                                                <Dropdown.Item onClick={() => {
-                                                    setProfileStreet(item!.streetName)
-                                                    console.log(item!.streetId, item!.streetName);
-                                                    setProfileStreetId(item!.streetId)
-                                                }}>
-                                                    {item.streetName}
-                                                </Dropdown.Item>
-                                            ))}
-                                        </DropdownMenu>
-                                    </Dropdown>
-                                </Form.Group>
+                                {!isFormDisabled && (
+                                    <>
+                                        <Form.Group className="p-3">
+                                            <Form.Label>Старый пароль:</Form.Label>
+                                            <Form.Control
+                                                className="control-color"
+                                                disabled={isFormDisabled}
+                                                required
+                                                type="password"
+                                                value={oldPassword}
+                                                onChange={(e) => setOldPassword(e.target.value)}
+                                            />
+                                        </Form.Group>
+                                        <Form.Group className="p-3">
+                                            <Form.Label>Новый пароль:</Form.Label>
+                                            <Form.Control
+                                                className="control-color"
+                                                disabled={isFormDisabled}
+                                                required
+                                                type="password"
+                                                value={newPassword}
+                                                onChange={(e) => setNewPassword(e.target.value)}
+                                            />
+                                        </Form.Group>
+                                    </>
+
+                                )}
+                                <div className="subscribe-container">
+                                    <p className="p-3">Подписка на район \ улицу:</p>
+                                    <Form.Group className="p-3">
+                                        <Form.Label>Район:</Form.Label>
+                                        <Dropdown>
+                                            <Dropdown.Toggle id="dropdown-autoclose-true" disabled={isFormDisabled}>
+                                                {profileDistrict ||'Выберите район для отслеживания отключений'}
+                                            </Dropdown.Toggle>
+                                            <DropdownMenu>
+                                                {districts.map((item : DistrictItem) => (
+                                                    <Dropdown.Item onClick={() => {
+                                                        setProfileDistrict(item!.name);
+                                                        console.log(item!.name, item!.id);
+                                                        setProfileDistrictId(item!.id);
+                                                    }}
+                                                    >
+                                                        {item.name}
+                                                    </Dropdown.Item>
+                                                ))}
+                                            </DropdownMenu>
+                                        </Dropdown>
+                                    </Form.Group>
+                                    <Form.Group className="p-3">
+                                        <Form.Label>Улица:</Form.Label>
+                                        <Dropdown>
+                                            <Dropdown.Toggle id="dropdown-autoclose-true" disabled={isFormDisabled}>
+                                                {profileStreet || 'Выберите улицу для отслеживания отключений'}
+                                            </Dropdown.Toggle>
+                                            <DropdownMenu>
+                                                {streets.map((item : StreetData) => (
+                                                    <Dropdown.Item onClick={() => {
+                                                        setProfileStreet(item!.streetName)
+                                                        console.log(item!.streetId, item!.streetName);
+                                                        setProfileStreetId(item!.streetId)
+                                                    }}>
+                                                        {item.streetName}
+                                                    </Dropdown.Item>
+                                                ))}
+                                            </DropdownMenu>
+                                        </Dropdown>
+                                    </Form.Group>
+                                </div>
                                 {isFormDisabled ? (
                                     <Form.Group className="p-3">
                                         <Button
@@ -192,7 +224,7 @@ export default function Profile() {
                                     </>
                                 )}
                             </div>
-                            <div className="mt-md-4 pb-2">
+                            <div className="mt-md-3">
                                 <Button className="btn btn-danger" href={"/"}>
                                     Вернуться на главную
                                 </Button>
