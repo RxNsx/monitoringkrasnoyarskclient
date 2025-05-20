@@ -95,7 +95,7 @@ export default function Profile() {
             className="vh-100 d-flex align-items-center"
             style={{ background: 'linear-gradient(135deg, #99CCCC 0%, #2575fc 100%)' }}
         >
-            <Container className="h-100">
+            <Container>
                 <Row className="d-flex justify-content-center align-items-center ">
                     <Col md={8} lg={6} xl={5}>
                         <Form onSubmit={onSubmitFormHandler}>
