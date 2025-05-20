@@ -5,7 +5,7 @@ export async function updateProfileUser(userId: string,
                                         email: string,
                                         districtId: string,
                                         streetId: string): Promise<UpdateUserProfileResponse> {
-    const url = "http://127.0.0.1:5000/api/Profiles/UpdateProfile";
+    const url = "api/Profiles/UpdateProfile";
 
     const updateProfileData = {
         userId: userId,
