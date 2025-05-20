@@ -7,7 +7,7 @@ import {GeoLocationData} from "../../interfaces/GeoLocationData.ts";
 
 export default function YandexMap() {
     const yandexContext = useContext(YandexMapContext);
-    const [geoLocationData, setGeoLocationData] = useState<GeoLocationData[] | undefined>();
+    const [geoLocationData, setGeoLocationData] = useState<GeoLocationData[]>([]);
 
     const COORDINATES = [56.02, 92.78];
     const ZOOM = 10;

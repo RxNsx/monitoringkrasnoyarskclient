@@ -11,8 +11,7 @@ export const YandexMapContext = createContext<YandexMapContextType | null>(null)
 export default function App() {
     const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
     const [token, setTokenData] = useState<string>('');
-
-    const [coords, setCoords] = useState<GeoLocationData[]>();
+    const [coords, setCoords] = useState<GeoLocationData[]>([]);
     const memoCoords = useMemo(() => ({coords, setCoords }), [coords])
 
     useEffect(() => {
