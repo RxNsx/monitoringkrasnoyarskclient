@@ -128,6 +128,12 @@ export default function Navigation () {
                         <Nav.Link href="/login">Войти</Nav.Link>
                     </>
                 }
+                <>
+                    <Nav.Link href="https://t.me/Krasnoyarsk005MonitoringBot">
+                        <img src="../../../public/tg_logo.svg" alt="Уведомления в Telegram" className="tg_logo"/>
+                        Уведомления в Telegram
+                    </Nav.Link>
+                </>
             </div>
         </Nav>
     )
