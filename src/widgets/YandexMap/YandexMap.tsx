@@ -17,6 +17,8 @@ export default function YandexMap() {
         switch(serviceTypeName) {
             case "Теплоснабжение":
                 return 'red';
+            case "Горячее водоснабжение":
+                return 'red';
             case "Холодное водоснабжение":
                 return 'darkblue';
             case "Электроснабжение":

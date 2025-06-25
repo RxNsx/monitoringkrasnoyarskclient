@@ -3,7 +3,9 @@ import {RegisterUser} from "../../interfaces/RegisterUser.ts";
 
 export default async function registerUserAsync(props : RegisterUser)
     : Promise<RegisterResponse> {
-    const url = "api/Users/RegisterUser";
+    // const localAddress = "http://127.0.0.1:5000/"
+    const localAddress = ""
+    const url = localAddress + "api/Users/RegisterUser";
 
     const registerData = {
         userName: props.userName,

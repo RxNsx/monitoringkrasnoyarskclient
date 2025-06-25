@@ -1,7 +1,9 @@
 import {StreetData} from "../../interfaces/StreetData.ts";
 
 export async function getStreetsData(): Promise<StreetData[]> {
-    const url = "api/streets/getallstreets";
+    // const localAddress = "http://127.0.0.1:5000/"
+    const localAddress = ""
+    const url = localAddress + "api/streets/getallstreets";
     return await fetch(url, {
         headers: {
             "Content-Type": "application/json",

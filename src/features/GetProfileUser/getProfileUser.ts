@@ -5,7 +5,9 @@ const getLocalStorageLoginName = () => {
 }
 
 export async function getProfileUserAsync() : Promise<UserProfile> {
-    const url = "api/users/GetUser";
+    // const localAddress = "http://127.0.0.1:5000/"
+    const localAddress = ""
+    const url = localAddress + "api/users/GetUser";
     const loginName = getLocalStorageLoginName();
 
     return await fetch(url + `?loginName=${loginName}`, {

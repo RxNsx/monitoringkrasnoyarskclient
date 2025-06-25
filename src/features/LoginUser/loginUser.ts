@@ -4,7 +4,9 @@ import {LoginResponse} from "../../interfaces/LoginResponse.ts";
 export async function loginUserAsync(props : LoginUser)
     : Promise<LoginResponse> {
 
-    const url = "api/Login/LoginUser";
+    // const localAddress = "http://127.0.0.1:5000/"
+    const localAddress = ""
+    const url = localAddress + "api/Login/LoginUser";
 
     const loginData = {
         loginName: props.loginName,
